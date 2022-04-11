@@ -1,7 +1,18 @@
-import '../styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import '../styles/index.scss'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+import Navbar from '@/components/shared/Navbar'
+
+const MyApp = ({ Component, pageProps }) => {
+    return (
+        <>
+            <Navbar />
+            <div className='container'>
+                <Component {...pageProps} />
+            </div>
+        </>
+
+    )
 }
 
 export default MyApp
