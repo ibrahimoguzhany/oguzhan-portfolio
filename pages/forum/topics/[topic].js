@@ -1,9 +1,7 @@
-import Navbar from '@/components/shared/Navbar'
 
 const Posts = () => {
     return (
         <>
-            <Navbar />
             <div className='container'>
                 <section className="section-title">
                     <div className="px-2">
@@ -30,7 +28,7 @@ const Posts = () => {
                                                 <div className="topic-header">
                                                     <div className="topic-meta">
                                                         <div className="name-container">
-                                                            <span className="name">Filip Jerga</span>
+                                                            <span className="name">Oguzhan Yilmaz</span>
                                                         </div>
                                                         <div className="date-container"><span className="date">21h</span></div>
                                                     </div>
@@ -108,7 +106,7 @@ const Posts = () => {
                                                 <div className="topic-header">
                                                     <div className="topic-meta">
                                                         <div className="name-container">
-                                                            <span className="name">Filip Jerga</span>
+                                                            <span className="name">Oguzhan Yilmaz</span>
                                                         </div>
                                                         <div className="date-container"><span className="date">21h</span></div>
                                                     </div>

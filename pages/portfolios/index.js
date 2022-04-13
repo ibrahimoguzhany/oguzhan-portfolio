@@ -3,7 +3,6 @@ import Navbar from '@/components/shared/Navbar'
 const Portfolios = () => {
     return (
         <>
-            <Navbar />
             <div class="container">
                 <section className="section-title">
                     <div className="px-2">
