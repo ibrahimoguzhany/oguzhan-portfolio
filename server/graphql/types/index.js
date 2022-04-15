@@ -7,7 +7,7 @@ const portfolioFields = `
   description: String,
   startDate: String,
   endDate: String
-`
+`;
 
 exports.portfolioTypes = `
   type Portfolio {
@@ -17,4 +17,4 @@ exports.portfolioTypes = `
   input PortfolioInput {
     ${portfolioFields}
   }
-`
+`;
