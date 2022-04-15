@@ -1,4 +1,3 @@
-import Navbar from '../components/shared/Navbar'
 
 const Login = () => {
   return (

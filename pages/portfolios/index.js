@@ -1,6 +1,17 @@
-import Navbar from '@/components/shared/Navbar'
 
-const Portfolios = () => {
+
+const apiCall = () => {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res({
+                testingData: 'This is the data'
+            })
+        }, 200)
+    })
+}
+
+
+const Portfolios = (props) => {
     return (
         <>
             <div className="container">
@@ -53,6 +64,12 @@ const Portfolios = () => {
                 </section></div>
         </>
     )
+}
+
+Portfolios.getInitialProps = async () => {
+    console.log('GET INITIAL PROPS OF PORTFOLIO')
+    const data = await apiCall()
+    return { ...data }
 }
 
 export default Portfolios
