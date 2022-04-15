@@ -2,7 +2,7 @@
 const data = {
     portfolios: [
         {
-            _id: "sad87dad79",
+            _id: "dasdasdas31231",
             title: 'Job in Netcentric',
             company: 'Netcentric',
             companyWebsite: 'www.google.com',
@@ -24,7 +24,7 @@ const data = {
             endDate: '01/01/2013'
         },
         {
-            _id: "sad87dad79",
+            _id: "fdsfa432423",
             title: 'Job in Netcentric',
             company: 'Netcentric',
             companyWebsite: 'www.google.com',
@@ -38,22 +38,39 @@ const data = {
 }
 
 
-exports.portfolioResolvers = {
+exports.portfolioQueries = {
     hello: () => {
         return 'Hello World!'
     },
-    portfolio: (args) => {
-        return data.portfolios.find(p => p._id === args.id)
+    portfolio: (root,{id}) => {
+        return data.portfolios.find(p => p._id === id)
 
     },
     portfolios: () => {
         return data.portfolios
     },
-    createPortfolio: (({ input }) => {
+}
+
+exports.portfolioMutations = {
+    createPortfolio: (root,{ input }) => {
         const _id = require('crypto').randomBytes(10).toString('hex')
         const newPortfolio = { ...input }
         newPortfolio._id = _id
         data.portfolios.push(newPortfolio)
         return newPortfolio
-    })
+    },
+    updatePortfolio: (root, {id, input}) => {
+        const index = data.portfolios.findIndex(p => p._id === id)
+        const oldPortfolio = data.portfolios[index]
+        
+        const updatedPortfolio = {...oldPortfolio, ...input}
+        data.portfolios[index] = updatedPortfolio
+        return updatedPortfolio
+    },
+    deletePortfolio: (root, {id}) => {
+        const index = data.portfolios.findIndex(p => p._id === id)
+        data.portfolios.splice(index, 1)
+        return id
+
+    }
 }

@@ -1,4 +1,5 @@
 const PortfolioDetailComponent = ({ portfolio }) => {
+  
   return (
     <div className="portfolio-detail">
       <div className="container">
