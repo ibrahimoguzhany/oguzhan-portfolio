@@ -8,29 +8,18 @@ import Hero from '@/components/shared/Hero'
 
 
 const MyApp = ({ Component, pageProps }) => {
-    const [showChild, setShowChild] = useState(false);
-    useEffect(() => {
-        setShowChild(true);
-    }, []);
 
-    if (!showChild) {
-        return null;
-    }
+    return (
+        <div className="portfolio-app">
+            <AppNavbar />
 
-    if (typeof window === 'undefined') {
-        return <></>;
-    } else {
-        return (
-            <div className="portfolio-app">
-                <AppNavbar />
-
-                {Component.name === 'Home' && <Hero />}
-                <div className='container'>
-                    <Component {...pageProps} />
-                </div>
+            {Component.name === 'Home' && <Hero />}
+            <div className='container'>
+                <Component {...pageProps} />
             </div>
-        );
-    }
+        </div>
+    );
+    //}
 }
 
 MyApp.getInitialProps = async (context) => {

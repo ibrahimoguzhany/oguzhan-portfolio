@@ -98,11 +98,6 @@ const Home = () => (
     </section>
     <a href="" className="btn btn-main bg-blue ttu">See More Posts</a>
     {/* HOME PAGE ENDS */}
-    {/* FORUM CATEGORIES START */}
-
-    {/* FORUM CATEGORIES ENDS */}
-
-
     {/* REPLIER STARTS */}
     {/* <div className='reply-controls is-open'> */}
     <div className='reply-controls'>
