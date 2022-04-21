@@ -4,13 +4,18 @@ class User {
     constructor(model) {
         this.Model = model;
     }
-
-    signIn() {
-        return "Signing In...";
+    signUp(signUpData) {
+        if (signUpData.password !== signUpData.passwordConfirmation) {
+            throw new Error('Passwords do not match!');
+        }
+        return this.Model.create(signUpData);
     }
-
-    signUp() {
-        return "Signing Up...";
+    signIn(signInData, ctx) {
+        const isAuthenticated = ctx.authenticate(signInData);
+        if (isAuthenticated) {
+            console.log('User is Authenticated');
+        }
+        return `Signing In Output!`;
     }
 
     signOut() {
