@@ -17,16 +17,15 @@ exports.createApolloServer = () => {
         type Query {
             portfolio(id: ID): Portfolio,
             portfolios: [Portfolio]
-        }
-
+    }
         type Mutation {
             createPortfolio(input: PortfolioInput): Portfolio
             updatePortfolio(id: ID, input: PortfolioInput) : Portfolio
             deletePortfolio(id: ID) : ID
 
             signUp(input: SignUpInput): String
-            signIn(input: SignInInput): String
-            signOut: String
+            signIn(input: SignInInput): User
+            signOut: Boolean
 
             }
 `;
@@ -39,8 +38,8 @@ exports.createApolloServer = () => {
 
     const apolloServer = new ApolloServer({
         typeDefs, resolvers,
-        context: () => ({
-            ...buildAuthContext(),
+        context: (args) => ({
+            ...buildAuthContext(args.req),
             models: {
                 Portfolio: new Portfolio(mongoose.model('Portfolio')),
                 User: new User(mongoose.model('User'))
