@@ -1,4 +1,4 @@
-import {gql} from "@apollo/client"
+import { gql } from "@apollo/client";
 
 export const GET_PORTFOLIO = gql`
     query Portfolio($id: ID) {
@@ -14,7 +14,7 @@ export const GET_PORTFOLIO = gql`
                 endDate
             }
         }
-        `
+        `;
 
 export const GET_PORTFOLIOS = gql`
     query Portfolios {
@@ -30,7 +30,7 @@ export const GET_PORTFOLIOS = gql`
                 endDate
                 
             }
-        }`
+        }`;
 
 export const CREATE_PORTFOLIO = gql`
   mutation CreatePortfolio {
@@ -82,4 +82,30 @@ export const UPDATE_PORTFOLIO = gql`
 }
         `;
 
-export const DELETE_PORTFOLIO = gql`mutation DeletePortfolio($id:ID) {deletePortfolio(id: $id)}`
+export const DELETE_PORTFOLIO = gql`mutation DeletePortfolio($id:ID) {deletePortfolio(id: $id)}`;
+
+
+// AUTH QUERIES STARTS ------------------
+export const SIGN_UP = gql`
+  mutation SingUp(
+    $email: String!,
+    $username: String!,
+    $name: String,
+    $avatar: String,
+    $password: String!,
+    $passwordConfirmation: String!
+  ) {
+    signUp(input: {
+      email: $email
+      username: $username
+      name: $name
+      avatar: $avatar
+      password: $password
+      passwordConfirmation: $passwordConfirmation
+    })
+  }
+`;
+
+
+// AUTH QUERIES ENDS ------------------
+

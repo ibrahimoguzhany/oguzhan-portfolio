@@ -1,27 +1,32 @@
-import { useState } from 'react';
+
+import React from "react";
+import { useForm } from 'react-hook-form';
 
 const RegisterForm = ({ onSubmit }) => {
-    const [form, setForm] = useState({});
+    const { register, handleSubmit } = useForm();
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
-    };
+
     return (
-        <form onSubmit={() => onSubmit(form)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
                 <label htmlFor="email">Avatar</label>
                 <input
-                    onChange={handleChange}
+                    {...register("avatar")}
                     type="text"
                     className="form-control"
                     id="avatar"
-                    name="avatar" />
+                    name="avatar"
+                />
             </div>
             <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input
-                    onChange={handleChange}
+                    {...register("username", {
+                        required: {
+                            value: true,
+                            message: "Username is required"
+                        }
+                    })}
                     type="text"
                     className="form-control"
                     id="username"
@@ -30,7 +35,12 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
-                    onChange={handleChange}
+                    {...register("email", {
+                        required: {
+                            value: true,
+                            message: "email is required"
+                        }
+                    })}
                     type="email"
                     className="form-control"
                     id="email"
@@ -39,7 +49,12 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
-                    onChange={handleChange}
+                    {...register("password", {
+                        required: {
+                            value: true,
+                            message: "password is required"
+                        }
+                    })}
                     type="password"
                     className="form-control"
                     id="password"
@@ -48,7 +63,12 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="passwordConfirmation">Password Confirmation</label>
                 <input
-                    onChange={handleChange}
+                    {...register("passwordConfirmation", {
+                        required: {
+                            value: true,
+                            message: "passwordConfirmation is required"
+                        }
+                    })}
                     type="password"
                     className="form-control"
                     id="passwordConfirmation"
