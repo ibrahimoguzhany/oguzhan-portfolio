@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { ApolloServer, gql } = require('apollo-server-express');
 
 //resolvers
-const { portfolioQueries, portfolioMutations, userMutations } = require('./resolvers');
+const { portfolioQueries, portfolioMutations, userMutations, userQueries } = require('./resolvers');
 const { portfolioTypes, userTypes } = require('./types');
 const { buildAuthContext } = require('./context/index');
 const Portfolio = require('./models/Portfolio');
@@ -17,6 +17,8 @@ exports.createApolloServer = () => {
         type Query {
             portfolio(id: ID): Portfolio,
             portfolios: [Portfolio]
+
+            user: User
     }
         type Mutation {
             createPortfolio(input: PortfolioInput): Portfolio
@@ -32,7 +34,7 @@ exports.createApolloServer = () => {
 
     // The root provides a resolver for each API endpoint
     const resolvers = {
-        Query: { ...portfolioQueries },
+        Query: { ...portfolioQueries, ...userQueries },
         Mutation: { ...portfolioMutations, ...userMutations },
     };
 
