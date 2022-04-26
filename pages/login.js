@@ -1,13 +1,10 @@
 import LoginForm from '@/components/forms/LoginForm';
-import { Mutation } from 'react-apollo';
-import { SIGN_IN } from '@/apollo/queries';
-import withApolloV2 from "@/hoc/withApolloV2";
+import withApollo from "@/hoc/withApollo";
 import Redirect from '@/components/shared/Redirect';
 import { useSignIn } from '../apollo/actions';
 
 const Login = () => {
-
-
+  const [signIn, { data, loading, error }] = useSignIn();
   const errorMessage = (error) => {
     return (error.graphQLErrors && error.graphQLErrors[0].message) || 'Something went wrong';
   };
@@ -17,16 +14,9 @@ const Login = () => {
         <div className="row">
           <div className="col-md-5 mx-auto">
             <h1 className="page-title">Login</h1>
-            <Mutation mutation={SIGN_IN}>
-              {(signInUser, { data, error }) =>
-                <>
-                  <LoginForm onSubmit={loginData => signInUser({ variables: loginData })} />
-                  {data && data.signIn && <Redirect to="/" />}
-                  {error && <div className='alert alert-danger'>{errorMessage(error)}</div>}
-                </>
-              }
-            </Mutation>
-
+            <LoginForm loading={loading} onSubmit={loginData => signIn({ variables: loginData })} />
+            {data && data.signIn && <Redirect to="/" />}
+            {error && <div className='alert alert-danger'>{errorMessage(error)}</div>}
           </div>
         </div>
       </div>
@@ -35,4 +25,4 @@ const Login = () => {
   );
 };
 
-export default withApolloV2(Login);
+export default withApollo(Login);

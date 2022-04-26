@@ -20,9 +20,8 @@ const Register = () => {
                         <Mutation mutation={SIGN_UP}>
                             {(signUpUser, { data, error }) =>
                                 <>
-                                    <RegisterForm onSubmit={registerData => {
-                                        signUpUser({ variables: registerData });
-                                    }} />
+                                    <RegisterForm onSubmit={registerData => signUpUser({ variables: registerData })
+                                    } />
                                     {data && data.signUp && <Redirect to="/login" />}
                                     {error && <div className='alert alert-danger'>{errorMessage(error)}</div>}
                                 </>

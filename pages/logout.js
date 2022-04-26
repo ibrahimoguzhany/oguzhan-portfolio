@@ -1,6 +1,17 @@
-import withApolloV2 from "@/hoc/withApolloV2";
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import withApollo from "@/hoc/withApollo";
+import { useSignOut } from '@/apollo/actions';
 
-const Logout = () => {
+const Logout = ({ apollo }) => {
+    const [signOut] = useSignOut();
+    const router = useRouter();
+
+    useEffect(() => {
+        signOut().then(() => {
+            apollo.resetStore().then(() => router.push('/login'));
+        });
+    }, []);
 
 
     return (
@@ -20,4 +31,4 @@ const Logout = () => {
     );
 };
 
-export default withApolloV2(Logout);
+export default withApollo(Logout);

@@ -14,25 +14,19 @@ const AppLink = ({ href, className, children }) => {
 
 
 const AppNavbar = () => {
-
-    const [appState, setAppState] = useState({
-        user: null,
-        hasResponse: false
-    });
+    const [user, setUser] = useState(null);
+    const [hasResponse, setHasResponse] = useState(false);
     const [getUser, { data, error }] = useLazyGetUser();
 
     useEffect(() => {
         getUser();
     }, []);
 
-    if (data && !appState.hasResponse) {
-        if (data.user && !appState.user) {
-            setAppState({ user: data.user, hasResponse: true });
-        }
-
-        if (!data.user && !appState.hasResponse) {
-            setAppState({ hasResponse: true });
-        }
+    if (data) {
+        if (data.user && !user) setUser(data.user);
+        if (!data.user && user) setUser(null);
+        if(!hasResponse) setHasResponse(true);
+         
     }
 
     return <div className="navbar-wrapper">
@@ -45,15 +39,15 @@ const AppNavbar = () => {
                     <AppLink href="/forum/categories" className="mr-3">Forum </AppLink>
                     <AppLink href="/cv" className="mr-3">CV</AppLink>
                 </Nav>
-                {appState.hasResponse &&
+                {hasResponse &&
                     <Nav>
-                        {appState.user &&
+                        {user &&
                             <>
-                                <span className="nav-link mr-4">Welcome {appState.user.username}</span>
+                                <span className="nav-link mr-4">Welcome {user.username}</span>
                                 <AppLink href="/logout" className="nav-link btn btn-danger">Sign Out</AppLink>
                             </>
                         }
-                        {(error || !appState.user) &&
+                        {(error || !user) &&
                             <>
                                 <AppLink href="/login" className="mr-3">Sign In</AppLink>
                                 <AppLink href="/register" className="mr-3 btn btn-success bg-green-2 bright">Sign Up</AppLink>
