@@ -2,9 +2,14 @@ import RegisterForm from '@/components/forms/RegisterForm';
 import { Mutation } from 'react-apollo';
 import { SIGN_UP } from '@/apollo/queries';
 import withApolloV2 from "../hoc/withApolloV2";
-import { useRouter } from 'next/router';
 import Redirect from '@/components/shared/Redirect';
 const Register = () => {
+
+    const errorMessage = (error) => {
+
+        //TODO: Handle DB Errors!!
+        return (error.graphQLErrors && error.graphQLErrors[0].message) || 'Something went wrong';
+    };
 
     return (
         <>
@@ -19,6 +24,7 @@ const Register = () => {
                                         signUpUser({ variables: registerData });
                                     }} />
                                     {data && data.signUp && <Redirect to="/login" />}
+                                    {error && <div className='alert alert-danger'>{errorMessage(error)}</div>}
                                 </>
                             }
                         </Mutation>

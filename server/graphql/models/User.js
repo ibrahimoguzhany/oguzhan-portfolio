@@ -1,14 +1,28 @@
-
-
 class User {
     constructor(model) {
         this.Model = model;
     }
-    signUp(signUpData) {
+
+    getAuthUser(ctx) {
+        if (ctx.isAuthenticated()) {
+            return ctx.getUser();
+        }
+        return null;
+    }
+
+    async signUp(signUpData) {
         if (signUpData.password !== signUpData.passwordConfirmation) {
             throw new Error('Passwords do not match!');
         }
-        return this.Model.create(signUpData);
+        try {
+            return await this.Model.create(signUpData);
+        } catch (e) {
+            if (e.code && e.code === 11000) {
+                throw new Error("User with the provided email already exists!");
+            }
+            throw e;
+        }
+
     }
     async signIn(signInData, ctx) {
         try {

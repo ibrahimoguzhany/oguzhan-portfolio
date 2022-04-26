@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 
 export const GET_PORTFOLIO = gql`
     query Portfolio($id: ID) {
@@ -87,7 +87,7 @@ export const DELETE_PORTFOLIO = gql`mutation DeletePortfolio($id:ID) {deletePort
 
 // AUTH QUERIES STARTS ------------------
 export const SIGN_UP = gql`
-  mutation SingUp(
+  mutation SignUp(
     $email: String!,
     $username: String!,
     $name: String,
@@ -106,6 +106,30 @@ export const SIGN_UP = gql`
   }
 `;
 
+export const SIGN_IN = gql`
+  mutation SignIn(
+    $email: String!,
+    $password: String!,
+  ) {
+    signIn(input: {
+      email: $email
+      password: $password
+    }) {
+      _id
+      username
+      role
+      avatar
+    }
+  }
+`;
 
+export const GET_USER = gql`
+  query User {
+    user {
+      _id
+      username
+      role
+    }
+  }
+`;
 // AUTH QUERIES ENDS ------------------
-

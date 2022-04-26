@@ -21,12 +21,7 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input
-                    {...register("username", {
-                        required: {
-                            value: true,
-                            message: "Username is required"
-                        }
-                    })}
+                    {...register("username")}
                     type="text"
                     className="form-control"
                     id="username"
@@ -35,12 +30,7 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
-                    {...register("email", {
-                        required: {
-                            value: true,
-                            message: "email is required"
-                        }
-                    })}
+                    {...register("email")}
                     type="email"
                     className="form-control"
                     id="email"
@@ -49,12 +39,7 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <input
-                    {...register("password", {
-                        required: {
-                            value: true,
-                            message: "password is required"
-                        }
-                    })}
+                    {...register("password")}
                     type="password"
                     className="form-control"
                     id="password"
@@ -63,12 +48,7 @@ const RegisterForm = ({ onSubmit }) => {
             <div className="form-group">
                 <label htmlFor="passwordConfirmation">Password Confirmation</label>
                 <input
-                    {...register("passwordConfirmation", {
-                        required: {
-                            value: true,
-                            message: "passwordConfirmation is required"
-                        }
-                    })}
+                    {...register("passwordConfirmation")}
                     type="password"
                     className="form-control"
                     id="passwordConfirmation"

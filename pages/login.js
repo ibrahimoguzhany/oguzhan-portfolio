@@ -1,44 +1,38 @@
+import LoginForm from '@/components/forms/LoginForm';
+import { Mutation } from 'react-apollo';
+import { SIGN_IN } from '@/apollo/queries';
+import withApolloV2 from "@/hoc/withApolloV2";
+import Redirect from '@/components/shared/Redirect';
+import { useSignIn } from '../apollo/actions';
 
 const Login = () => {
+
+
+  const errorMessage = (error) => {
+    return (error.graphQLErrors && error.graphQLErrors[0].message) || 'Something went wrong';
+  };
   return (
     <>
-      <div className="container">
-        <section className="section-title">
-          <div className="px-2">
-            <div className="pt-5 pb-4">
-              <h1>Login Page</h1>
-            </div>
-          </div>
-        </section>
-        <div className="bwm-form">
-          <div className="row">
-            <div className="col-md-5 mx-auto">
-              <h1 className="page-title">Login</h1>
-              <form>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password" />
-                </div>
-                <button
-                  type="submit"
-                  className="btn btn-main bg-blue py-2 ttu">Submit</button>
-              </form>
-            </div>
+      <div className="bwm-form mt-5">
+        <div className="row">
+          <div className="col-md-5 mx-auto">
+            <h1 className="page-title">Login</h1>
+            <Mutation mutation={SIGN_IN}>
+              {(signInUser, { data, error }) =>
+                <>
+                  <LoginForm onSubmit={loginData => signInUser({ variables: loginData })} />
+                  {data && data.signIn && <Redirect to="/" />}
+                  {error && <div className='alert alert-danger'>{errorMessage(error)}</div>}
+                </>
+              }
+            </Mutation>
+
           </div>
         </div>
       </div>
-    </>
-  )
-}
 
-export default Login
+    </>
+  );
+};
+
+export default withApolloV2(Login);

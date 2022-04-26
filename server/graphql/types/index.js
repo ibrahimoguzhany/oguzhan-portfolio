@@ -40,7 +40,6 @@ exports.userTypes = `
     passwordConfirmation: String!
   }
 
-
   input SignInInput {
     email: String!
     password: String!
